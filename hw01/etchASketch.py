@@ -13,11 +13,20 @@ curses.cbreak()
 window.keypad(True)
 curses.curs_set(False)
 
-xpos = 0
+xpos = 0 #initiliaze cursor at top left of window
 ypos = 0
 
-print("etchASketch start...\n")
+#Welcome message
+window.addstr(ypos, xpos, "Welcome to Etch-A-Sketch! \n" +
+                           "Move using the arror keys, \n" +
+                           "Clear the window with 'c'\n" +
+                           "Exit with 'x' \n\n" +
+                           "Press any button to start now!", curses.A_BOLD)
+window.refresh()
 
+key = window.getch() #after any button press, begins with cursor at top left
+window.clear()
+window.addch(ypos, xpos, '*', curses.A_BOLD)
 
 while True: #waits for an input reacts accordingly
     key = window.getch()
@@ -35,7 +44,7 @@ while True: #waits for an input reacts accordingly
             xpos += 1
     elif key == ord('c'):
         window.clear()
-    elif key == ord('x'):
+    elif key == ord('x'): 
         break
     window.addch(ypos, xpos, '*', curses.A_BOLD)
     window.refresh()
