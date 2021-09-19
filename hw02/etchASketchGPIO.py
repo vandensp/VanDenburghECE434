@@ -12,13 +12,15 @@ buttonLeft = "P8_7"
 buttonUp = "P8_8"
 buttonDown = "P8_9"
 buttonRight = "P8_10"
+buttonClear = "P8_15"
 
-GPIO.setup(buttonLeft, GPIO.IN)
+GPIO.setup(buttonLeft, GPIO.IN) 
 GPIO.setup(buttonUp, GPIO.IN)
 GPIO.setup(buttonDown, GPIO.IN)
 GPIO.setup(buttonRight, GPIO.IN)
+GPIO.setup(buttonClear, GPIO.IN) #GPIO setup complete
 
-def blinkAndMove(button):
+def blinkAndMove(button): #checks push bottons and adjusts cursor accordingly
     global xpos, ypos, window
     if button == buttonUp:
         if ypos > 0:
@@ -32,6 +34,8 @@ def blinkAndMove(button):
     elif button == buttonRight:
         if xpos < (curses.COLS - 2):
             xpos += 1
+    elif button == buttonClear:
+        window.clear()
     window.addch(ypos, xpos, '*', curses.A_BOLD)
     window.refresh()
     time.sleep(0.01) #debounce delay
@@ -57,10 +61,11 @@ key = window.getch() #after any button press, begins with cursor at top left
 window.clear()
 window.addch(ypos, xpos, '*', curses.A_BOLD)
 
-GPIO.add_event_detect(buttonLeft, GPIO.FALLING, callback=blinkAndMove)
+GPIO.add_event_detect(buttonLeft, GPIO.FALLING, callback=blinkAndMove) #events to react to a GPIO input
 GPIO.add_event_detect(buttonUp, GPIO.FALLING, callback=blinkAndMove)
 GPIO.add_event_detect(buttonRight, GPIO.FALLING, callback=blinkAndMove)
 GPIO.add_event_detect(buttonDown, GPIO.FALLING, callback=blinkAndMove)
+GPIO.add_event_detect(buttonClear, GPIO.FALLING, callback=blinkAndMove)
 
 
 while True: #waits for an input reacts accordingly
