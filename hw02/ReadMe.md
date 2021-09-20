@@ -16,7 +16,7 @@ Measuring a gpio pin on an Oscilloscope
 3.	How close is it to 100ms?
 	142.49 ms
 4.	Why do they differ?
-	
+	Other processies on the chip interrupt the program controlling the GPIO cycling.
 5.	Run htop and see how much processor you are using.
 	1.3%
 6.	Try different values for the sleep time (2nd argument). What's the shortest period you can get?
