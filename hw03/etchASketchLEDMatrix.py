@@ -49,9 +49,8 @@ def moveCursor(button): #checks push bottons and adjusts cursor accordingly
         sketch = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     ]
-    sketch[xpos-1] += int(ypos)
+    sketch[xpos-1] |= int(ypos)
     bus.write_i2c_block_data(matrix, 0, sketch)
-    print(xpos,"   ",ypos)
     for fade in range(0xef, 0xe0, -1):
         bus.write_byte_data(matrix, fade, 0)
         time.sleep(0.01) #debounce delay
@@ -76,3 +75,5 @@ for fade in range(0xef, 0xe0, -1):
 print("Etch-A-Sketch Start")
 while True: 
     time.sleep(1000)
+
+
