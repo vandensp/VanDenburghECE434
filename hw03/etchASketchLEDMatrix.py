@@ -85,28 +85,29 @@ sketch = [0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 bus.write_i2c_block_data(matrix, 0, sketch)
 for fade in range(0xef, 0xe0, -1):
     bus.write_byte_data(matrix, fade, 0)
+leftEncoder.zero()
+rightEncoder.zero()
 
 print("Etch-A-Sketch Start")
 while True: #waits for an input reacts accordingly
-    if leftEncoder.position > 2:
-        if ypos > 1:
-            ypos >>= 1
-    elif leftEncoder.position < -2:
-       if ypos < 0x80:
-            ypos <<= 1 
-    elif rightEncoder.position > 2:
-        if xpos > 1:
-            xpos -= 2
-    elif rightEncoder.position < -2:
-        if xpos < 15:
-            xpos += 2
     if (abs(leftEncoder.position) > 2 or abs(rightEncoder.position) > 2):
+        if leftEncoder.position > 2:
+            if ypos > 1:
+                ypos >>= 1
+        elif leftEncoder.position < -2:
+           if ypos < 0x80:
+                ypos <<= 1 
+        elif rightEncoder.position > 2:
+            if xpos > 1:
+                xpos -= 2
+        elif rightEncoder.position < -2:
+            if xpos < 15:
+                xpos += 2
         print(xpos,"     ",ypos)
         sketch[xpos-1] |= int(ypos)
         bus.write_i2c_block_data(matrix, 0, sketch)
         for fade in range(0xef, 0xe0, -1):
             bus.write_byte_data(matrix, fade, 0)
-        time.sleep(0.05) #debounce delay
+        time.sleep(0.1) #debounce delay
         leftEncoder.zero()
         rightEncoder.zero()
-            

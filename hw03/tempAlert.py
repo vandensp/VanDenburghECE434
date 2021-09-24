@@ -11,10 +11,10 @@ address2 = 0x4A
 temp1alert= "P8_17"
 temp2alert = "P8_18"
 
-bus.write_byte_data(address1, 2, 0x1C) #set high and low temps (27C/80.6F - 28C/82.4F)
-bus.write_byte_data(address1, 3, 0x1B)
-bus.write_byte_data(address2, 2, 0x10)
-bus.write_byte_data(address2, 3, 0x1C)
+bus.write_byte_data(address1, 2, 20 << 4) #set high and low temps (27C/80.6F - 28C/82.4F)
+bus.write_byte_data(address1, 3, 28 << 4)
+bus.write_byte_data(address2, 2, 20 << 4)
+bus.write_byte_data(address2, 3, 28 << 4)
 
 def detect(alert):
     print(alert,": Temperature is too high")
