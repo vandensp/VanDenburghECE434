@@ -65,8 +65,6 @@ def moveCursor(button): #checks push bottons and adjusts cursor accordingly
     ]
     sketch[xpos-1] |= int(ypos)
     bus.write_i2c_block_data(matrix, 0, sketch)
-    for fade in range(0xef, 0xe0, -1):
-        bus.write_byte_data(matrix, fade, 0)
     time.sleep(0.01) #debounce delay
 
 xpos = 1 #initiliaze cursor at top left of window
@@ -83,8 +81,6 @@ sketch = [0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 ]
 bus.write_i2c_block_data(matrix, 0, sketch)
-for fade in range(0xef, 0xe0, -1):
-    bus.write_byte_data(matrix, fade, 0)
 leftEncoder.zero()
 rightEncoder.zero()
 
@@ -106,8 +102,6 @@ while True: #waits for an input reacts accordingly
         print(xpos,"     ",ypos)
         sketch[xpos-1] |= int(ypos)
         bus.write_i2c_block_data(matrix, 0, sketch)
-        for fade in range(0xef, 0xe0, -1):
-            bus.write_byte_data(matrix, fade, 0)
         time.sleep(0.1) #debounce delay
         leftEncoder.zero()
         rightEncoder.zero()
