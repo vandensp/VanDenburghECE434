@@ -59,3 +59,22 @@ Use the toggle1 examples measure how fast you can toggle one gpio bit use c and 
 | :-----------: | :----------: | :------: | :------: | :------------------: | :-------------: | :------------------: | :-------------: |
 | Max Frequency | 68.7 Hz      | 6.01 kHz | 7.63 kHz | 56.2 kHz             | 294 kHz         | 54.1 kHz             | 271 kHz         |
 | Min Period    | 14.55 ms     | 166.5 us | 131 us   | 17.8 us              | 3.4 us          | 18.5 us              | 3.69 us         |
+
+# hw02 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2/2 | Buttons and LEDs 
+|  7/7 | Etch-a-Sketch works
+|      | Measuring a gpio pin on an Oscilloscope 
+|  2/2 | Questions answered
+|  4/4 | Table complete
+|  2/2 | gpiod
+|      | Security
+|  1/1 | ssh port
+|  1/1 | iptables 
+|  1/1 | fail2ban
+| 20/20   | **Total**
+
+Nice videos
+Security is missing -3
